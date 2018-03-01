@@ -4,7 +4,11 @@ const gulp = require('gulp'),
 	sass = require('gulp-sass'),
 	childProcess = require('child_process');
 
-gulp.task('default', () => childProcess.spawn('node', ['index.njs']));
+gulp.task('default',	() => childProcess.spawn('node', ['index.njs']));
+
+gulp.task('upload',	() => childProcess.spawn('git', ['push', '-u', 'origin', 'upload']));
+//gulp.task('download',	() => childProcess.spawn('git', []));
+
 const compile = {
 	pug:	() => gulp.src('pug/**/*.pug')
 			.pipe(pug())
