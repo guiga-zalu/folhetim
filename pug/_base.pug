@@ -1,0 +1,56 @@
+﻿//-http://jadelang.net/reference/mixins/
+//- var host = 'http://127.0.0.1:8081/'
+- var host = 'http://localhost:8081/'
+//-extends ./_mixins
+doctype html
+html
+	head
+		meta(charset="utf-8")
+		block title
+			title /title
+		block favicon
+			link(rel="icon" href="favicon.ico")
+		block styles
+			- l = ['main', 'materialize/materialize', 'materialize/icons', 'materialize-stepper/min', 'materialize/nouislider/nouislider', 'materialize-clockpicker/clockpicker']
+			each item in l
+				link(rel='stylesheet' href='/css/' + item + '.css')
+	body
+		header
+			block header
+				nav
+					.nav-wrapper.container
+						a.brand-logo(href=host)
+							i.material-icons.left cloud
+							| Logo
+						block header_links
+							ul.right.hide-on-med-and-down
+								- header_links = [{name: 'Autores', url: 'autor', icon: 'search'}, {name: 'Obras', url: 'obra', icon: 'store'}, {name: 'Meu jornal', url: 'jornal', icon: 'view_module'}]
+								each item, i in header_links
+									li
+										a(href=host + item.url) #{item.name}
+											i.material-icons.left #{item.icon}
+		main
+			block content
+		block footer
+			footer.page-footer
+				.container
+					.row
+						.col.l6.s12
+							h5: a(href=host) Folhetim
+							p.grey-text.text-lighten-4 Meu rodapé com descrição
+						.col.l4.offset-l2.s12
+							h6 Alguns links úteis
+							block footer_links
+								ul
+									- footer_links = [{name: 'Link', url: ''}, {name: 'Link', url: ''}, {name: 'Link', url: ''}, {name: 'Link', url: ''}, {name: 'Link', url: ''}]
+									each item, i in footer_links
+										li
+											a(href=host + item.url) #{item.name}
+				.footer-copyright
+					.container
+						| Desde 2017 à #[script document.write((new Date()).getFullYear());]
+						a.grey-text.text-lighten-4.right Mais links
+		block scripts
+			- s = ['spent-time', 'main', 'hammer.min', 'jquery/jquery.min', 'jquery/nicescroll/nicescroll.min', 'jquery/nicescroll/nicescroll.iframehelper.min', 'jquery/materialize/min', 'jquery/materialize/autocomplete.min', 'jquery/materialize/clockpicker', 'jquery/materialize/nouislider/nouislider.min', 'jquery/materialize/stepper.min']
+			each item in s
+				script(src='/js/' + item + '.js')
